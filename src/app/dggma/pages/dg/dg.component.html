@@ -1,0 +1,17 @@
+<p>dg works!</p>
+<div class="container">
+
+  <div class="mt-5"></div>
+  <div class="row mt-1 w-100">
+    <div class="col-sm-12 card1" *ngFor="let dg of dgs">
+      <div class="row">
+
+        <div class="col" [routerLink]="['/dg/content']">
+          <h5 class="mt-2"> {{ dg.text}} </h5>
+          <!-- <h6 class="h666"> {{ dg.}}</h6> -->
+        </div>
+      </div>
+      <hr class="" style="opacity: 100; border: 3px solid #334855 ">
+    </div>
+  </div>
+</div>

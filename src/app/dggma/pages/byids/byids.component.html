@@ -1,0 +1,154 @@
+<p>byids works!</p>
+
+<div class="container">
+  <div class="row">
+
+  <div class="col-4">
+
+    <h1>VAR</h1>
+    <strong>Variables detectadas</strong>
+    <div class="row" *ngFor="let item of secuenciaVAR">
+      <div class="col">
+
+
+        <br>
+        <strong>Variable: </strong>
+        <span for=""> {{item.nom_var}}</span>
+
+
+        <br>
+
+
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <h1>PI</h1>
+    <div class="row" *ngFor="let item of pi">
+      <div class="col">
+        <strong>Unidad Administrativa responsable del PI:</strong>
+
+        <br>
+        <p for=""> {{getDireccionGeneralText(item.dg_pi)}}</p>
+        <br>
+        <strong>Programa de Información (PI):</strong>
+
+        <br>
+        <p for=""> {{getProgInfoText(item.nom_pi)}}</p>
+
+
+        <br>
+        <strong>Proceso de Producción del PI:</strong>
+
+        <br>
+        <p for=""> {{getProgInfoText(item.pp_pi)}}</p>
+
+        <br>
+        <strong>Dirección General Adjunta responsable del Programa de Información:</strong>
+
+        <br>
+        <p for=""> {{getDga_PprodText(item.dga_pi)}}</p>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+
+    <h1>AEG</h1>
+    <strong>Actividades Estadísticas o Geográficas:</strong>
+    <div class="row" *ngFor="let item of aegSecuencia">
+      <div class="col">
+        <br>
+        <strong>Dirección General responsable de la AEG: </strong>
+        <span for=""> {{getDga_PprodText(item.dg_aeg)}}</span>
+        <br>
+        <strong>Actividad Estadística o Geográfica para la UA: </strong>
+        <span for=""> {{getAEG_2Text(item.nom_aeg)}}</span>
+        <br>
+        <strong>Dirección General Adjunta responsable de la AEG: </strong>
+        <span for=""> {{getAEG_ProdText(item.dga_aeg)}}</span>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 mt-5">
+
+    <h1>MDEA</h1>
+    <strong>Relación con el Marco para el Desarrollo de las Estadísticas:</strong>
+    <div class="row" *ngFor="let item of mdeas">
+      <div class="col" >
+
+
+        <br>
+        <strong>Componente: </strong>
+        <span for=""> {{getComponenteText(item.comp_mdea)}}</span>
+        <br>
+        <strong>Subcomponente: </strong>
+        <span for=""> {{getSubcomponenteText(item.subcomp_mdea)}}</span>
+        <br>
+        <strong>Topico: </strong>
+        <span for=""> {{getTopicoText(item.topico_mdea)}}</span>
+        <br>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4 mt-5">
+
+    <h1>ODS</h1>
+    <strong>Relación con los Objetivos del Desarrollo Sostenible (ODS):</strong>
+    <div class="row" *ngFor="let item of ODSes">
+      <div class="col">
+
+
+        <br>
+        <strong>Objetivo: </strong>
+        <span for=""> {{getObjetivODSText(item.obj_ods)}}</span>
+        <br>
+        <strong>Meta: </strong>
+        <span for=""> {{getMetaODSText(item.meta_ods)}}</span>
+        <br>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4 mt-5">
+
+    <h1>PS</h1>
+    <strong>Relación con algún Programa Sectorial (PS):</strong>
+    <div class="row" *ngFor="let item of PSes">
+      <div class="col">
+
+
+        <br>
+        <strong>Programa Sectorial: </strong>
+        <span for=""> {{getps2023Text(item.prog_ps)}}</span>
+        <br>
+        <strong>Indicador que corresponde al PS: </strong>
+        <span for=""> {{getIndicadoresPS2023Text(item.indicador_ps)}}</span>
+        <br>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+</div>
+

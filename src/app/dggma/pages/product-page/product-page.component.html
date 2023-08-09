@@ -1,0 +1,255 @@
+<div class="container">
+
+  <div class="mt-5"></div>
+  <div class="row mt-1 w-100">
+    <div class="col-sm-12 card1" *ngFor="let product of products">
+      <div class="row">
+
+        <div class="col" [routerLink]="['/dg/by', product.interview__id]">
+          <h5 class="mt-2"> {{ product.nom_producto}} </h5>
+          <h6 class="h666"> {{ product.nom_prod}}</h6>
+
+
+          <strong *ngIf="product.dg_prod == 1">Dirección General de Geografía y Medio Ambiente</strong>
+            <strong *ngIf="product.dg_prod == 2">Dirección General de Estadísticas Sociodemográficas</strong>
+            <strong *ngIf="product.dg_prod == 3">Dirección General de Estadísticas Económicas</strong>
+            <strong *ngIf="product.dg_prod == 4">Dirección General de Estadísticas de Gobierno, Seguridad Pública y Justicia</strong>
+            <strong *ngIf="product.dg_prod == 5">Dirección General de Integración, Análisis e Investigación</strong>
+
+          <br>
+
+          <span><strong>Este producto es de tipo:</strong>
+            {{ product.tipo_prod__1 == 0 ? '' : (product.tipo_prod__1 == 1 ? 'Geográfico' : '') }}
+            {{ product.tipo_prod__2 == 0 ? '' : (product.tipo_prod__2 == 1 ? 'y Estadístico' : '') }}
+          </span>
+
+          <br>
+          <span>
+            <strong>Escala geográfica:</strong>
+
+
+            <span *ngIf="product.escala == 14">
+              {{ product.o_escala }}
+            </span>
+            <span *ngIf="product.escala != 14">
+              {{ getEscalasText(product.escala) }}
+            </span>
+
+          </span>
+
+          <br>
+
+          <strong>El producto se fragmenta:</strong>
+          <span>
+            {{ product.fragmenta == 1 ? 'Sí' : (product.fragmenta == 2 ? 'No' : '') }}
+          </span>
+
+          <br>
+
+          <strong *ngIf="product.fragmenta == 1">Número de fragmentos en que se divide el producto:</strong>
+          <span>
+            {{ product.n_fragmenta }}
+          </span>
+
+          <br>
+
+          <strong>Tipo(s) de soporte del producto:</strong>
+          <span>
+
+            {{ product.tipo_soporte__1 == 0 ? '' : (product.tipo_soporte__1 == 1 ? 'Datos Geográficos' : '') }}
+            {{ product.tipo_soporte__2 == 0 ? '' : (product.tipo_soporte__2 == 1 ? 'Tabulado' : '') }}
+            {{ product.tipo_soporte__3 == 0 ? '' : (product.tipo_soporte__3 == 1 ? 'Publicaciones' : '') }}
+            {{ product.tipo_soporte__4 == 0 ? '' : (product.tipo_soporte__4 == 1 ? 'Otra' : '') }}
+          </span>
+
+          <br>
+          <strong *ngIf="product.tipo_soporte__4 == 1">Otro tipo de soporte:</strong>
+          <span *ngIf="product.tipo_soporte__4 == 1">
+
+            {{ product.o_soporte}}
+          </span>
+
+          <br>
+
+          <div *ngIf="product.formato_geo__1 != 0 && product.formato_geo__2 != 0 && product.formato_geo__3 != 0 && product.formato_geo__4 != 0 && product.formato_geo__5 != 0 ">
+
+
+
+            <strong>Formatos de Datos Geográficos:</strong>
+          <span>
+
+            {{ product.formato_geo__1 == 0 ? '' : (product.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : '') }}
+            {{ product.formato_geo__2 == 0 ? '' : (product.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : '') }}
+            {{ product.formato_geo__3 == 0 ? '' : (product.formato_geo__3 == 1 ? 'GeoPDF' : '') }}
+            {{ product.formato_geo__4 == 0 ? '' : (product.formato_geo__4 == 1 ? 'PDF' : '') }}
+            {{ product.formato_geo__5 == 0 ? '' : (product.formato_geo__5 == 1 ? 'Otra' : '') }}
+          </span>
+
+          <br>
+
+
+          </div>
+           <strong *ngIf="product.formato_geo__5 == 1">Otro tipo de formato geográfico:</strong>
+          <span *ngIf="product.formato_geo__5 == 1">
+
+            {{ product.o_formato_geo}}
+          </span>
+
+          <br>
+
+          <strong>Cobertura del producto:</strong>
+          <span>
+            {{ product.cobertura_geo__1 == 0 ? '' : (product.cobertura_geo__1 == 1 ? 'Nacional' : '') }}
+            {{ product.cobertura_geo__2 == 0 ? '' : (product.cobertura_geo__2 == 1 ? 'Estatal' : '') }}
+            {{ product.cobertura_geo__3 == 0 ? '' : (product.cobertura_geo__3 == 1 ? 'Municipal' : '') }}
+            {{ product.cobertura_geo__4 == 0 ? '' : (product.cobertura_geo__4 == 1 ? 'Regional' : '') }}
+            {{ product.cobertura_geo__5 == 0 ? '' : (product.cobertura_geo__5 == 1 ? 'Otra' : '') }}
+          </span>
+          <br>
+          <strong *ngIf="product.cobertura_geo__5 == 1">
+            Otro tipo de cobertura geográfica:</strong>
+            <span>
+
+              {{ product.o_cobertura }}
+            </span>
+            <br>
+
+
+          <span>
+            <strong>Año de referencia:</strong>
+            {{ product.a_referencia}}
+          </span>
+          <br>
+
+          <span>
+            <strong>Año de publicación:</strong>
+            {{ product.a_publicacion}}
+          </span>
+
+          <br>
+          <span *ngIf="product.actualizacion == 1">
+            <strong>Actualización:</strong>
+            {{ product.p_actualizacion == 1 ? 'Mensual' : (product.p_actualizacion == 2 ? 'Anual' : '') }}
+            {{ product.p_actualizacion == 3 ? 'Bienal' : (product.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+            {{ product.p_actualizacion == 5 ? 'Quinquenal' : (product.p_actualizacion == 6 ? 'Irregular' : '') }}
+            {{ product.p_actualizacion == 7 ? ''+ product.o_periodo : ''}}
+          </span>
+          <span *ngIf="product.actualizacion == 2">
+            <strong>No se actualiza</strong>
+          </span>
+          <br>
+          <span>
+            <a [href]="product.liga">Ligas de acceso</a>
+          </span>
+
+          <br>
+          <span *ngIf="product.metodologia == 1">
+
+
+
+            <strong *ngIf="product.metodologia == 1">Metodologia:</strong>
+            <br>
+            <a [href]="product.liga_metodologia">{{ product.liga_metodologia}}</a>
+
+
+            <br>
+
+            <strong *ngIf="product.comentario_cg != ''">Comentarios: </strong>
+
+            <label for="">{{ product.comentario_cg }} </label>
+
+          </span>
+
+          <span *ngIf="product.metodologia == 2">
+
+            <strong>No cuenta con metodologia</strong>
+          </span>
+
+
+          <br>
+
+          <span *ngIf="product.num_var != 0">
+            <strong> Variables detectadas: </strong>
+            {{product.num_var}}
+          </span>
+
+          <span *ngIf="product.num_var == 0">
+            <strong> Ninguna variable detectada</strong>
+
+          </span>
+
+          <br>
+
+          <span *ngIf="product.pi == 1">
+            <strong> Productos de Información(PI): </strong>
+            {{product.num_pi}}
+          </span>
+
+          <span *ngIf="product.pi == 2">
+            <strong> Ningún Productos de Información(PI):</strong>
+
+          </span>
+
+          <br>
+
+          <span *ngIf="product.act_aeg == 1">
+            <strong> Actividades Estadísticas o Geográficas: </strong>
+            {{product.num_aeg}}
+          </span>
+
+          <span *ngIf="product.act_aeg == 2">
+            <strong> No cuenta con Actividad Estadística o Geográfica</strong>
+
+          </span>
+
+
+          <br>
+
+          <span *ngIf="product.relacion_mdea == 1">
+            <strong> Relaciones con el Marco para el Desarrollo de las Estadísticas Ambientales (MDEA): </strong>
+            {{product.num_mdea}}
+          </span>
+
+          <span *ngIf="product.relacion_mdea == 2">
+            <strong> No cuenta con relaciones con el Marco para el Desarrollo de las Estadísticas Ambientales
+              (MDEA)</strong>
+
+          </span>
+
+          <br>
+
+          <span *ngIf="product.relacion_ods == 1">
+            <strong> Relaciones con los Objetivos del Desarrollo Sostenible (ODS): </strong>
+            {{product.num_ods}}
+          </span>
+
+          <span *ngIf="product.relacion_ods == 2">
+            <strong> No cuenta con relaciones con los Objetivos del Desarrollo Sostenible (ODS)</strong>
+
+          </span>
+
+          <br>
+
+          <span *ngIf="product.relacion_ods == 1">
+            <strong> Relaciones con algún Programa Sectorial (PS): </strong>
+            {{product.num_ods}}
+          </span>
+
+          <span *ngIf="product.relacion_ods == 2">
+            <strong> No cuenta con relaciones con algún Programa Sectorial (PS)</strong>
+
+          </span>
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <hr class="" style="opacity: 100; border: 3px solid #334855 ">
+    </div>
+  </div>
+
+</div>
