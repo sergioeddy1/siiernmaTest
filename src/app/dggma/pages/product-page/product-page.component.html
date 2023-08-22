@@ -1,12 +1,11 @@
-<div class="container">
+<!-- <div class="container">
 
-  <div class="mt-5"></div>
-  <div class="row mt-1 w-100">
-    <div class="col-sm-12 card1" *ngFor="let product of products">
+  <div class="row mt-5 w-100">
+    <div class="col-sm-12 card1" *ngFor="let product of productsById">
       <div class="row">
 
         <div class="col" [routerLink]="['/dg/by', product.interview__id]">
-          <h5 class="mt-2"> {{ product.nom_producto}} </h5>
+          <h3 class="mt-2"> {{ product.nom_producto}} </h3>
           <h6 class="h666"> {{ product.nom_prod}}</h6>
 
 
@@ -18,7 +17,7 @@
 
           <br>
 
-          <span><strong>Este producto es de tipo:</strong>
+          <span><strong>Producto de tipo:</strong>
             {{ product.tipo_prod__1 == 0 ? '' : (product.tipo_prod__1 == 1 ? 'Geográfico' : '') }}
             {{ product.tipo_prod__2 == 0 ? '' : (product.tipo_prod__2 == 1 ? 'y Estadístico' : '') }}
           </span>
@@ -135,7 +134,7 @@
             {{ product.p_actualizacion == 7 ? ''+ product.o_periodo : ''}}
           </span>
           <span *ngIf="product.actualizacion == 2">
-            <strong>No se actualiza</strong>
+            <strong>Actualización: no</strong>
           </span>
           <br>
           <span>
@@ -252,4 +251,935 @@
     </div>
   </div>
 
+</div> -->
+<!-- <div class="container-fluid">
+  <h1 class="text-center p-5">Productos registrados por dirección</h1>
+
+  <div class="container">
+    <div *ngFor="let dg of productsById; let i = index">
+      <div class="card shadow-sm p-2 mb-3 bg-body-tertiary rounded">
+        <h3>{{ dg.nom_producto }}</h3>
+
+
+        <p class="d-inline-flex gap-1">
+
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            Button with data-bs-target
+          </button>
+
+        </p>
+
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user
+            activates the relevant trigger.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="container-fluid">
+  <h1 class="text-center p-5">Productos registrados por dirección</h1>
+
+  <div class="container">
+    <div *ngFor="let dg of productsById; let i = index">
+      <div class="card shadow-sm p-2 mb-3 bg-body-tertiary rounded" data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapseExample' + i" aria-expanded="false"
+            [attr.aria-controls]="'collapseExample' + i">
+        <h3>{{ dg.nom_producto }}</h3>
+
+
+
+        <div class="collapse" [id]="'collapseExample' + i">
+          <div class="card card-body">
+            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the
+            user
+            activates the relevant trigger.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="container-fluid">
+  <h1 class="text-center p-5">Productos detectados</h1>
+
+  <div class="container">
+    <div *ngFor="let dg of productsById; let i = index">
+      <div class="card1 shadow-sm p-2 mb-3 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+        <h3>{{ dg.nom_producto }}</h3>
+        <h6 class="h666"> {{ dg.nom_prod}}</h6>
+
+        <div class="collapse" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the
+            user activates the relevant trigger.
+          </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col d-flex justify-content-end">
+              <button class="btn btn-primary mt-2" >
+            Mas Información
+          </button>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container-fluid">
+
+  <div class="row">
+
+      <div class="col">
+        <div class="card2 shadow-sm  bg-body-tertiary rounded m-1">
+          <div class="d-flex">
+            <h6>Filtros o controles.</h6>
+            <button class="btn btn-outline-secondary btn-sm ms-auto mb-1" (click)="allFalse()">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <div class="card card-body">
+
+              <div class="row">
+
+                <div class="col">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                      Fechas:
+                    </li>
+                  </ul>
+                  <div class="row mt-2">
+                    <div class="col">
+                      <div class="row g-2 align-items-center">
+                        <div class="col-auto">
+                          <label for="inputPassword6" class="col-form-label ms-2">Año de referencia:</label>
+                        </div>
+                        <div class="col-auto">
+                          <!-- <select class="form-select form-select-sm" aria-label="Small select example" (change)="onDateSelect($event)">
+                            <option value="">Seleccionar fecha</option>
+                            <option *ngFor="let date of uniqueDates" [value]="date">{{ date }}</option>
+                          </select> -->
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col">
+
+                      <div class="row g-2 align-items-center">
+                        <div class="col-auto">
+                          <label class="form-label col-form-label">Año de publicación:</label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                      Tipos de soporte:
+                    </li>
+                  </ul>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="typeDatoGeo"
+                          [checked]="checkboxesState['typeDatoGeo']" (change)="handleCheckboxChange($event)">
+                        <label class="form-check-label" for="typeDatoGeo">
+                          Datos Geográficos
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="typeTabulado"
+                          [checked]="checkboxesState['typeTabulado']" (change)="handleCheckboxChange($event)">
+                        <label class="form-check-label" for="typeTabulado">
+                          Tabulado
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="typePublicacion"
+                          [checked]="checkboxesState['typePublicacion']" (change)="handleCheckboxChange($event)">
+                        <label class="form-check-label" for="typePublicacion">
+                          Publicaciones
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-3">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                      Producto de tipo:
+                    </li>
+                  </ul>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="prodgeografico"
+                      [checked]="checkboxesState['prodgeografico']" (change)="handleCheckboxChange($event)">
+                    <label class="form-check-label" for="prodgeografico">
+                      Geográfico
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="prodestadistico"
+                      [checked]="checkboxesState['prodestadistico']" (change)="handleCheckboxChange($event)">
+                    <label class="form-check-label" for="prodestadistico">
+                      Estadístico
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="col-6">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                      Buscar:
+                    </li>
+                  </ul>
+                  <div class="row">
+                    <div class="col">
+
+                      <div class="form-group">
+                        <input type="text" class="form-control mt-2" [formControl]="searchFormControl" placeholder="Buscar productos" />
+                        <div *ngIf="filteredProducts$ | async as filteredProducts">
+                          <ul class="search-results" *ngIf="filteredProducts.length > 0" >
+                            <li *ngFor="let product of filteredProducts" class="search-result-item">
+                              <div [routerLink]="['/dg/by', product.interview__id]">{{ product.nom_producto }}</div>
+                            </li>
+                          </ul>
+                          <p *ngIf="filteredProducts.length === 0 && searchFormControl.value !== ''">No se encontraron resultados.</p>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+
+
+
+
+                  </div>
+                </div>
+
+                <div class="col-3">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                      Coberturas:
+                    </li>
+                  </ul>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="cobeNacional"
+                          [checked]="checkboxesState['cobeNacional']" (change)="handleCheckboxChange($event)">
+                        <label class="form-check-label" for="cobeNacional">
+                          Nacional
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="cobeEstatal"
+                          [checked]="checkboxesState['cobeEstatal']" (change)="handleCheckboxChange($event)">
+                        <label class="form-check-label" for="cobeEstatal">
+                          Estatal
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="cobeMunicipal"
+                          [checked]="checkboxesState['cobeMunicipal']" (change)="handleCheckboxChange($event)">
+                        <label class="form-check-label" for="cobeMunicipal">
+                          Municipal
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="cobRegional"
+                          [checked]="checkboxesState['cobRegional']" (change)="handleCheckboxChange($event)">
+                        <label class="form-check-label" for="cobRegional">
+                          Regional
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+          </div>
+    </div>
+      </div>
+  </div>
+
+  <div class="container">
+    <div *ngIf="showFilteredProducts">
+      <div *ngFor="let dg of filteredProducts; let i = index">
+        <div class="card1 shadow-sm p-2 mb-3 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+          <h3>{{ dg.nom_producto }}</h3>
+          <h6 class="h666">{{ dg.nom_prod }}</h6>
+          <div class="collapse" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+            <div class="row">
+              <div class="col">
+                <div class="card card-body" (click)="$event.stopPropagation()">
+                  <div class="row">
+                    <div class="col">
+                      <strong>Producto de tipo: </strong>
+                      <span class="badge">
+                        {{ dg.tipo_prod__1 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 0 ? 'Geográfico' : '') }}
+                        {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 0 && dg.tipo_prod__2 == 1 ? 'Estadístico' : '') }}
+                        {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '') }}
+                      </span>
+                    </div>
+
+                    <div class="col">
+                      <strong>Escala geográfica:</strong>
+                      <span *ngIf="dg.escala == 14">
+                        {{ dg.o_escala }}
+                      </span>
+                      <span *ngIf="dg.escala != 14">
+                        {{ getEscalasText(dg.escala) }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="col">
+                          <strong>El producto se fragmenta:</strong>
+                          <span class="badge m-1">{{ dg.fragmenta == 1 ? 'Sí' : (dg.fragmenta == 2 ? 'No' : '') }}</span>
+                          <br>
+                          <strong *ngIf="dg.fragmenta == 1">Número de fragmentos en que se divide el producto: </strong>
+                          <span class="badge m-1">{{ dg.n_fragmenta }}</span>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <strong>Cobertura del producto: </strong>
+
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__1 == 1">
+                            {{ dg.cobertura_geo__1 == 1 ? 'Nacional' : '' }}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__2 == 1">
+                            {{ dg.cobertura_geo__2 == 1 ? 'Estatal' : ''}}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__3 == 1">
+                            {{ dg.cobertura_geo__3 == 1 ? 'Municipal' : '' }}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__4 == 1">
+                            {{ dg.cobertura_geo__4 == 1 ? 'Regional' : '' }}
+
+                          </span>
+                              <span class="badge mt-1" style="word-wrap: break-word; white-space: normal; max-width: 80%;" *ngIf="dg.cobertura_geo__5 == 1">
+                            {{ dg.cobertura_geo__5 == 1 ? 'Otra: ' + dg.o_cobertura : '' }}
+                          </span>
+
+
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <span>
+                            <strong>Año de referencia:</strong>
+                            {{ dg.a_referencia}}
+                          </span>
+                        </div>
+                        <div class="col">
+                          <span>
+                            <strong>Año de publicación:</strong>
+                            {{ dg.a_publicacion}}
+                          </span>
+                        </div>
+                      </div>
+
+                      <span *ngIf="dg.actualizacion == 1">
+                        <strong>Se actualiza:</strong>
+                        {{ dg.p_actualizacion == 1 ? 'Mensual' : (dg.p_actualizacion == 2 ? 'Anual' : '') }}
+                        {{ dg.p_actualizacion == 3 ? 'Bienal' : (dg.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                        {{ dg.p_actualizacion == 5 ? 'Quinquenal' : (dg.p_actualizacion == 6 ? 'Irregular' : '') }}
+                        {{ dg.p_actualizacion == 7 ? ''+ dg.o_periodo : ''}}
+                      </span>
+                      <span *ngIf="dg.actualizacion == 2">
+                        <strong>Se actualiza: No</strong>
+                      </span>
+                      <br>
+                      <span *ngIf="dg.liga">
+                        <strong>Ligas de acceso: </strong>
+                        <a (click)="$event.stopPropagation()" target="_blank" [href]="dg.liga">enlace.</a>
+                      </span>
+                      <br>
+                      <span *ngIf="dg.metodologia == 1">
+                        <strong *ngIf="dg.metodologia == 1">Cuenta con metodologia: </strong>
+                        <a (click)="$event.stopPropagation()" [href]="dg.liga_metodologia" target="_blank">enlace.</a>
+                      </span>
+                      <span *ngIf="dg.metodologia == 2">
+                        <strong>No cuenta con metodologia</strong>
+                      </span>
+
+
+                    </div>
+
+
+
+                    <div class="col-6">
+                      <strong>Tipo(s) de soporte del producto:</strong>
+                      <div class="row">
+                        <div class="col" *ngIf="dg?.tipo_soporte__1 == 1">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{ dg.tipo_soporte__1 == 1
+                              ? 'Datos Geográficos' : ''}}
+                            </li>
+                            <li *ngIf="dg.tipo_soporte__1 == 1" class="list-group-item">
+                              <strong> En formato: </strong>
+
+                              <span class="badge me-1" *ngIf="dg.formato_geo__1 == 1">
+                                {{ dg.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__2 == 1">
+                                {{ dg.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''}}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__3 == 1">
+                                {{ dg.formato_geo__3 == 1 ? 'GeoPDF' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__4 == 1">
+                                {{ dg.formato_geo__4 == 1 ? 'PDF' : '' }}
+
+                              </span>
+                              <span class="badge" *ngIf="dg.formato_geo__5 == 1">
+                                {{ dg.formato_geo__5 == 1 ? 'Otro: ' + dg.o_formato_geo : '' }}
+
+                              </span>
+
+                            </li>
+
+
+                          </ul>
+
+
+                        </div>
+
+                        <div class="col"
+                          *ngIf="(dg?.tipo_soporte__1 == 1 || dg?.tipo_soporte__1 == 0) && dg?.tipo_soporte__2 == 1 ">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__2 == 1
+                              ? 'Tabulado' : ''
+                              }}
+                            </li>
+                            <li class="list-group-item">
+                              <strong> En formato: </strong>
+
+                              <span class="badge me-1" *ngIf="dg.formato_tab__1 == 1">
+                                {{ dg.formato_tab__1 == 1 ? '.dbf' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__2 == 1">
+                                {{ dg.formato_tab__2 == 1 ? '.csv' : ''}}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__3 == 1">
+                                {{ dg.formato_tab__3 == 1 ? '.txt' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__4 == 1">
+                                {{ dg.formato_tab__4 == 1 ? '.xlsx' : '' }}
+
+                              </span>
+                              <span class="badge" *ngIf="dg.formato_tab__5 == 1">
+                                {{ dg.formato_tab__5 == 1 ? 'Otro: ' + dg.o_formato_tab : '' }}
+
+                              </span>
+
+
+                            </li>
+
+                          </ul>
+
+
+                        </div>
+
+
+                      </div>
+                      <div class="row">
+                        <div class="col" *ngIf="dg.tipo_soporte__3">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__3 == 1
+                              ? 'Publicaciones' : ''
+                              }}
+                            </li>
+                          </ul>
+
+                        </div>
+                        <div class="col" *ngIf="dg.tipo_soporte__4">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__4 == 1
+                              ? 'Otro: ' + dg.o_soporte : ''
+                              }}
+                            </li>
+                          </ul>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <hr>
+                      <span *ngIf="dg.num_var != 0">
+                        <strong> Variables detectadas: </strong>
+                        <span class="badge m-1">{{dg.num_var}}</span>
+                      </span>
+                      <span *ngIf="dg.num_var == 0">
+                        <strong>Ninguna variable detectada.</strong>
+                      </span>
+
+
+
+
+                      <br>
+
+                      <span *ngIf="dg.act_aeg == 1">
+                        <strong> Actividades Estadísticas o Geográficas: </strong>
+                        <span class="badge m-1">{{dg.num_aeg}}</span>
+
+                      </span>
+
+                      <span *ngIf="dg.act_aeg == 2">
+                        <strong> No cuenta con Actividad Estadística o Geográfica.</strong>
+
+                      </span>
+
+                      <br>
+
+                      <span *ngIf="dg.relacion_ods == 1">
+                        <strong> Relaciones con los Objetivos del Desarrollo Sostenible: </strong>
+                        <span class="badge m-1">{{dg.num_ods}}</span>
+                      </span>
+                      <span *ngIf="dg.relacion_ods == 2">
+                        <strong> No cuenta con relaciones con los Objetivos del Desarrollo Sostenible (ODS).</strong>
+                      </span>
+
+                    </div>
+
+                    <div class="col-6">
+                      <hr>
+                      <span *ngIf="dg.pi == 1">
+                        <strong> Producto de Información(PI): </strong>
+                        <span class="badge m-1">{{dg.num_pi}}</span>
+                      </span>
+                      <span *ngIf="dg.pi == 2">
+                        <strong> Ningún Producto de Información detectado.</strong>
+                      </span>
+
+                      <br>
+
+                      <span *ngIf="dg.relacion_mdea == 1">
+                        <strong> Relaciones con el Marco para el Desarrollo de las Estadísticas Ambientales: </strong>
+                        <span class="badge m-1">{{dg.num_mdea}}</span>
+
+                      </span>
+                      <span *ngIf="dg.relacion_mdea == 2">
+                        <strong> No cuenta con relaciones con el Marco para el Desarrollo de las Estadísticas
+                          Ambientales.</strong>
+                      </span>
+
+                      <br>
+
+                      <span *ngIf="dg.relacion_ods == 1">
+                        <strong> Relaciones con algún Programa Sectorial (PS): </strong>
+                        <span class="badge m-1">{{dg.num_ods}}</span>
+
+                      </span>
+
+                      <span *ngIf="dg.relacion_ods == 2">
+                        <strong> No cuenta con relaciones con algún Programa Sectorial (PS).</strong>
+                      </span>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex justify-content-end">
+                <a [routerLink]="['/dg/by', dg.interview__id]" class="btn btn-primary mt-2"
+                  (click)="$event.stopPropagation()">
+                  Mas Información
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!showFilteredProducts">
+      <div *ngFor="let dg of productsById; let i = index">
+        <div class="card1 shadow-sm p-2 mb-3 bg-body-tertiary rounded" (click)="toggleCollapse(i)">
+          <h3>{{ dg.nom_producto }}</h3>
+          <h6 class="h666">{{ dg.nom_prod }}</h6>
+          <div class="collapse" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+            <div class="row">
+              <div class="col">
+                <div class="card card-body" (click)="$event.stopPropagation()">
+                  <div class="row">
+                    <div class="col">
+                      <strong>Producto de tipo: </strong>
+                      <span class="badge">
+                      {{ dg.tipo_prod__1 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 0 ? 'Geográfico' : '') }}
+                      {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 0 && dg.tipo_prod__2 == 1 ? 'Estadístico' : '') }}
+                      {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '') }}
+                      </span>
+
+                    </div>
+
+                    <div class="col">
+                      <strong>Escala geográfica:</strong>
+                      <span *ngIf="dg.escala == 14">
+                        {{ dg.o_escala }}
+                      </span>
+                      <span *ngIf="dg.escala != 14">
+                        {{ getEscalasText(dg.escala) }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          <strong>El producto se fragmenta:</strong>
+                          <span class="badge m-1">{{ dg.fragmenta == 1 ? 'Sí' : (dg.fragmenta == 2 ? 'No' : '') }}</span>
+                          <br>
+                          <strong *ngIf="dg.fragmenta == 1">Número de fragmentos en que se divide el producto: </strong>
+                          <span class="badge m-1">{{ dg.n_fragmenta }}</span>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <strong>Cobertura del producto: </strong>
+
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__1 == 1">
+                            {{ dg.cobertura_geo__1 == 1 ? 'Nacional' : '' }}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__2 == 1">
+                            {{ dg.cobertura_geo__2 == 1 ? 'Estatal' : ''}}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__3 == 1">
+                            {{ dg.cobertura_geo__3 == 1 ? 'Municipal' : '' }}
+
+                          </span>
+                          <span class="badge me-1" *ngIf="dg.cobertura_geo__4 == 1">
+                            {{ dg.cobertura_geo__4 == 1 ? 'Regional' : '' }}
+
+                          </span>
+                          <span class="badge" *ngIf="dg.cobertura_geo__5 == 1">
+                            {{ dg.cobertura_geo__5 == 1 ? 'Otra: ' + dg.o_cobertura : '' }}
+
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col">
+                          <span>
+                            <strong>Año de referencia:</strong>
+                            {{ dg.a_referencia}}
+                          </span>
+                        </div>
+                        <div class="col">
+                          <span>
+                            <strong>Año de publicación:</strong>
+                            {{ dg.a_publicacion}}
+                          </span>
+                        </div>
+                      </div>
+
+                      <span *ngIf="dg.actualizacion == 1">
+                        <strong>Se actualiza:</strong>
+                        {{ dg.p_actualizacion == 1 ? 'Mensual' : (dg.p_actualizacion == 2 ? 'Anual' : '') }}
+                        {{ dg.p_actualizacion == 3 ? 'Bienal' : (dg.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                        {{ dg.p_actualizacion == 5 ? 'Quinquenal' : (dg.p_actualizacion == 6 ? 'Irregular' : '') }}
+                        {{ dg.p_actualizacion == 7 ? ''+ dg.o_periodo : ''}}
+                      </span>
+                      <span *ngIf="dg.actualizacion == 2">
+                        <strong>Se actualiza: No</strong>
+                      </span>
+                      <br>
+                      <span *ngIf="dg.liga">
+                        <strong>Ligas de acceso: </strong>
+                        <a (click)="$event.stopPropagation()" target="_blank" [href]="dg.liga">enlace.</a>
+                      </span>
+                      <br>
+                      <span *ngIf="dg.metodologia == 1">
+                        <strong *ngIf="dg.metodologia == 1">Cuenta con metodologia: </strong>
+                        <a (click)="$event.stopPropagation()" [href]="dg.liga_metodologia" target="_blank">enlace.</a>
+                      </span>
+                      <span *ngIf="dg.metodologia == 2">
+                        <strong>No cuenta con metodologia</strong>
+                      </span>
+
+
+                    </div>
+
+
+
+                    <div class="col">
+                      <strong>Tipo(s) de soporte del producto:</strong>
+                      <div class="row">
+                        <div class="col" *ngIf="dg?.tipo_soporte__1 == 1">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{ dg.tipo_soporte__1 == 1
+                              ? 'Datos Geográficos' : ''}}
+                            </li>
+                            <li *ngIf="dg.tipo_soporte__1 == 1" class="list-group-item">
+                              <strong> En formato: </strong>
+
+                              <span class="badge me-1" *ngIf="dg.formato_geo__1 == 1">
+                                {{ dg.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__2 == 1">
+                                {{ dg.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''}}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__3 == 1">
+                                {{ dg.formato_geo__3 == 1 ? 'GeoPDF' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_geo__4 == 1">
+                                {{ dg.formato_geo__4 == 1 ? 'PDF' : '' }}
+
+                              </span>
+                              <span class="badge" *ngIf="dg.formato_geo__5 == 1">
+                                {{ dg.formato_geo__5 == 1 ? 'Otro: ' + dg.o_formato_geo : '' }}
+
+                              </span>
+
+                            </li>
+
+
+                          </ul>
+
+
+                        </div>
+
+                        <div class="col"
+                          *ngIf="(dg?.tipo_soporte__1 == 1 || dg?.tipo_soporte__1 == 0) && dg?.tipo_soporte__2 == 1 ">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__2 == 1
+                              ? 'Tabulado' : ''
+                              }}
+                            </li>
+                            <li class="list-group-item">
+                              <strong> En formato: </strong>
+
+                              <span class="badge me-1" *ngIf="dg.formato_tab__1 == 1">
+                                {{ dg.formato_tab__1 == 1 ? '.dbf' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__2 == 1">
+                                {{ dg.formato_tab__2 == 1 ? '.csv' : ''}}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__3 == 1">
+                                {{ dg.formato_tab__3 == 1 ? '.txt' : '' }}
+
+                              </span>
+                              <span class="badge me-1" *ngIf="dg.formato_tab__4 == 1">
+                                {{ dg.formato_tab__4 == 1 ? '.xlsx' : '' }}
+
+                              </span>
+                              <span class="badge" *ngIf="dg.formato_tab__5 == 1">
+                                {{ dg.formato_tab__5 == 1 ? 'Otro: ' + dg.o_formato_tab : '' }}
+
+                              </span>
+
+
+                            </li>
+
+                          </ul>
+
+
+                        </div>
+
+
+                      </div>
+                      <div class="row">
+                        <div class="col" *ngIf="dg.tipo_soporte__3">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__3 == 1
+                              ? 'Publicaciones' : ''
+                              }}
+                            </li>
+                          </ul>
+
+                        </div>
+                        <div class="col" *ngIf="dg.tipo_soporte__4">
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                              {{
+                              dg.tipo_soporte__4 == 1
+                              ? 'Otro: ' + dg.o_soporte : ''
+                              }}
+                            </li>
+                          </ul>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <hr>
+                      <span *ngIf="dg.num_var != 0">
+                        <strong> Variables detectadas: </strong>
+                        <span class="badge m-1">{{dg.num_var}}</span>
+                      </span>
+                      <span *ngIf="dg.num_var == 0">
+                        <strong>Ninguna variable detectada.</strong>
+                      </span>
+
+
+
+
+                      <br>
+
+                      <span *ngIf="dg.act_aeg == 1">
+                        <strong> Actividades Estadísticas o Geográficas: </strong>
+                        <span class="badge m-1">{{dg.num_aeg}}</span>
+
+                      </span>
+
+                      <span *ngIf="dg.act_aeg == 2">
+                        <strong> No cuenta con Actividad Estadística o Geográfica.</strong>
+
+                      </span>
+
+                      <br>
+
+                      <span *ngIf="dg.relacion_ods == 1">
+                        <strong> Relaciones con los Objetivos del Desarrollo Sostenible: </strong>
+                        <span class="badge m-1">{{dg.num_ods}}</span>
+                      </span>
+                      <span *ngIf="dg.relacion_ods == 2">
+                        <strong> No cuenta con relaciones con los Objetivos del Desarrollo Sostenible (ODS).</strong>
+                      </span>
+
+                    </div>
+
+                    <div class="col-6">
+                      <hr>
+                      <span *ngIf="dg.pi == 1">
+                        <strong> Producto de Información(PI): </strong>
+                        <span class="badge m-1">{{dg.num_pi}}</span>
+                      </span>
+                      <span *ngIf="dg.pi == 2">
+                        <strong> Ningún Producto de Información detectado.</strong>
+                      </span>
+
+                      <br>
+
+                      <span *ngIf="dg.relacion_mdea == 1">
+                        <strong> Relaciones con el Marco para el Desarrollo de las Estadísticas Ambientales: </strong>
+                        <span class="badge m-1">{{dg.num_mdea}}</span>
+
+                      </span>
+                      <span *ngIf="dg.relacion_mdea == 2">
+                        <strong> No cuenta con relaciones con el Marco para el Desarrollo de las Estadísticas
+                          Ambientales.</strong>
+                      </span>
+
+                      <br>
+
+                      <span *ngIf="dg.relacion_ods == 1">
+                        <strong> Relaciones con algún Programa Sectorial (PS): </strong>
+                        <span class="badge m-1">{{dg.num_ods}}</span>
+
+                      </span>
+
+                      <span *ngIf="dg.relacion_ods == 2">
+                        <strong> No cuenta con relaciones con algún Programa Sectorial (PS).</strong>
+                      </span>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col d-flex justify-content-end">
+                <a [routerLink]="['/dg/by', dg.interview__id]" class="btn btn-primary mt-2"
+                  (click)="$event.stopPropagation()">
+                  Mas Información
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
 </div>
+
+

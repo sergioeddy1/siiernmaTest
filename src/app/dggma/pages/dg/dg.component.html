@@ -1,17 +1,54 @@
-<p>dg works!</p>
+<!--
 <div class="container">
 
-  <div class="mt-5"></div>
-  <div class="row mt-1 w-100">
+
+  <div class="row mt-5 w-100">
     <div class="col-sm-12 card1" *ngFor="let dg of dgs">
-      <div class="row">
+      <div class="row" >
 
         <div class="col" [routerLink]="['/dg/content']">
           <h5 class="mt-2"> {{ dg.text}} </h5>
-          <!-- <h6 class="h666"> {{ dg.}}</h6> -->
+
         </div>
       </div>
-      <hr class="" style="opacity: 100; border: 3px solid #334855 ">
+      <p class="placeholder-wave">
+        <span class="placeholder col-12 placeholder-xs bg-primary"></span>
+      </p>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="container-fluid">
+
+<h1 class="text-center p-5">Sistema Integrado de Inventarios y Encuestas de Recursos Naturales y Medio Ambiente.</h1>
+<div class="container">
+  <div *ngFor="let dg of dgs; let i = index">
+    <div class="card shadow-sm p-2 mb-3 bg-body-tertiary rounded" [routerLink]="['/dg/content', dg.id]">
+      <h2>{{ dg.text }}.</h2>
+      <p>Productos detectados. {{dg.id}}</p>
+
     </div>
   </div>
 </div>
+
+
+</div> -->
+
+<div class="container-fluid">
+  <h1 class="text-center p-5">Eje Temático del Agua</h1>
+
+  <div class="container">
+    <div *ngFor="let dg of dgs; let i = index">
+      <div class="card shadow-sm p-2 mb-3 bg-body-tertiary rounded" [routerLink]="['/dg/content', dg.id]">
+        <h2>{{ dg.text }}</h2>
+
+        <p>Productos Detectados: {{ productCounts[i] }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+

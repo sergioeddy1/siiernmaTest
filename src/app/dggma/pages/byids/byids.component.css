@@ -1,0 +1,22 @@
+.card1 {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  /* cursor: pointer; */
+  transition: transform 0.2s;
+}
+
+/* .card1:hover {
+  transform: scale(1.04);
+} */
+
+.show {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+}
+
+.badge {
+  background-color: #cfe2ff;
+  color: black;
+}

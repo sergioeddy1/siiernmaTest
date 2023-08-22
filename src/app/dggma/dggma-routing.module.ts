@@ -13,7 +13,7 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children: [
       { path: 'dg', component: DgComponent},
-      { path: 'content', component: ProductPageComponent},
+      { path: 'content/:by', component: ProductPageComponent},
       { path: 'search', component: SearchPageComponent},
       { path: 'new', component: NewPageComponent},
       { path: 'by/:id', component: ByidsComponent},

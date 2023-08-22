@@ -93,6 +93,38 @@ export class DGService {
     );
   }
 
+  getSecuenciaProductBy( id: string ): Observable<Products[]> {
+    const url = `${ this.baseUrl}/products?dg_prod=${ id }`;
+    console.log(url);
+    console.log(id)
+    return this._http.get<Products[]>(url)
+    .pipe(
+      tap(data => console.log('DATA by Service',data))
+    );
+  }
+
+  getProductCountByDirection(id: string): Observable<number> {
+
+    const url = `${this.baseUrl}/products?dg_prod=${id}`;
+    return this._http.get<Products[]>(url)
+      .pipe(
+        map(products => products.length),
+
+      );
+  }
+
+  getProductById( id: string ): Observable<Products[]> {
+    const url = `${ this.baseUrl}/products?interview__id=${ id }`;
+    console.log(url);
+    console.log(id)
+    return this._http.get<Products[]>(url)
+    .pipe(
+      tap(data => console.log('DATA by Service',data))
+    );
+  }
+
+
+
   getProdInfo(){
     return this._http.get<ProgInformacion[]>(`${ this.baseUrl}/prog_informacion`)
   }
@@ -127,6 +159,13 @@ export class DGService {
 
   getEscalas(){
     return this._http.get<Escalas[]>(`${ this.baseUrl}/escalas`)
+  }
+
+  getSuggestions( query: string ) : Observable<Products[]> {
+    if (query.trim() === '') {
+    return of([]); // Emitir un arreglo vacío si el término de búsqueda está vacío
+  }
+    return this._http.get<Products[]>(`${ this.baseUrl }/products?q=${ query }`)
   }
 
 

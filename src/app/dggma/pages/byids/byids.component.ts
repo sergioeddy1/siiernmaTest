@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Products, SecuenciaVar } from '../../interfaces/product.interface';
+import { Escalas, Products, SecuenciaVar } from '../../interfaces/product.interface';
 import { DGService } from '../../services/dg.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap, tap } from 'rxjs';
@@ -36,6 +36,9 @@ export class ByidsComponent implements OnInit{
   public ps2023: PS2023[]=[];
   public indicadoresPS2023: IndicadoresPS2023[]=[];
   public secuenciaVAR: SecuenciaVar[]=[]
+  public escalas: Escalas[]=[];
+  public productsById: Products[] = [];
+  expandedIndex: number | null = null;
 
   constructor(
     private _direServices: DGService,
@@ -135,12 +138,39 @@ export class ByidsComponent implements OnInit{
       this.secuenciaVAR = data;
     })
 
+    this._leeLink.params
+    .pipe(
+
+      switchMap(({ id }) =>{
+
+        // if (by==1) {
+        //   by=2
+        // } else if(by==2) {
+        //   by=3
+        // } else if ( by==3){
+        //   by=1
+        // } else if ( by==4){
+        //   by=5
+        // } else if ( by ==5){
+        //   by=4
+        // }
+
+        return this._direServices.getProductById(id)
+      } )
+    )
+    .subscribe( data => {
+      this.productsById = data;
+    })
+
 
 this.console();
 
   }
 
   console(){
+    console.log(this.pi)
+    console.log(this._leeLink.params)
+    console.log(this.productsById)
     console.log(this.PSes)
   }
 
@@ -281,6 +311,16 @@ getIndicadoresPS2023Text(indicador_ps: number): string {
     }
   }
   return indicadoresPS2023Text;
+}
+getEscalasText(indicador_ps: number): string {
+  let escalasText = '';
+  for (let escalas of this.escalas) {
+    if (escalas.id === indicador_ps) {
+      escalasText = escalas.text;
+      break;
+    }
+  }
+  return escalasText;
 }
 
 

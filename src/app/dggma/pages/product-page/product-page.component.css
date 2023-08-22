@@ -1,21 +1,65 @@
 .card1 {
-
-
-  transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
-
-  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  /* cursor: pointer; */
+  transition: transform 0.2s;
 }
 
 .card1:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+  transform: scale(1.04);
+}
+.show {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
 }
 
-.h666 {
-  color: #706F6F;
-  height: 10px;
+.badge{
+  background-color: #cfe2ff;
+  color: black;
 }
 
-h4 {
-  height: 50px;
+.card2 {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  /* cursor: pointer; */
+  transition: transform 0.2s;
 }
+
+/* Estilo para la lista de resultados */
+.search-results {
+  list-style-type: none;
+  /* Elimina los puntos de la lista */
+  padding: 0;
+  /* Elimina el espacio interno de la lista */
+  border: 1px solid #ccc;
+  /* Agrega un borde para separar visualmente las opciones */
+  max-height: 200px;
+  /* Limita la altura máxima para evitar que sea demasiado larga */
+  overflow-y: auto;
+  /* Agrega una barra de desplazamiento vertical si es necesario */
+
+  position: absolute;
+    z-index: 1000;
+    /* Ajusta el valor de z-index según sea necesario para que la lista aparezca por encima de la tarjeta */
+    width: 49%;
+    /* Ajusta el ancho de la lista según sea necesario */
+    background-color: white;
+
+}
+
+/* Estilo para cada elemento de la lista */
+.search-result-item {
+  padding: 8px;
+  /* Añade un espacio interno a cada elemento de la lista */
+  cursor: pointer;
+  /* Cambia el cursor al pasar sobre los elementos */
+}
+
+/* Cambiar el color de fondo al pasar sobre los elementos */
+.search-result-item:hover {
+  background-color: #f0f0f0;
+}
+

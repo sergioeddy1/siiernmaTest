@@ -1,154 +1,431 @@
-<p>byids works!</p>
-
 <div class="container">
+
   <div class="row">
+    <div class="col">
+    <div *ngFor="let dg of productsById; let i = index">
+      <div class="card1 shadow-sm  bg-body-tertiary rounded">
+        <h3>{{ dg.nom_producto }}</h3>
+        <h6 class="h666">{{ dg.nom_prod }}</h6>
+        <div class="" [ngClass]="{'show': expandedIndex === i}" [id]="'collapseExample' + i">
+          <div class="row">
+            <div class="col">
+              <div class="card card-body">
+                <div class="row">
+                  <div class="col">
+                    <strong>Producto de tipo:</strong>
+                    {{ dg.tipo_prod__1 == 0 ? '' : (dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 0 ? 'Geográfico' : '') }}
+                    {{ dg.tipo_prod__2 == 0 ? '' : (dg.tipo_prod__1 == 0 && dg.tipo_prod__2 == 1 ? 'Estadístico' : '')
+                    }}
+                    {{ dg.tipo_prod__1 == 1 && dg.tipo_prod__2 == 1 ? 'Geográfico y Estadístico' : '' }}
+                  </div>
+
+                  <div class="col">
+                    <strong>Escala geográfica:</strong>
+                    <span *ngIf="dg.escala == 14">
+                      {{ dg.o_escala }}
+                    </span>
+                    <span *ngIf="dg.escala != 14">
+                      {{ getEscalasText(dg.escala) }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col">
+                        <strong>El producto se fragmenta:</strong>
+                        <span class="badge m-1">{{ dg.fragmenta == 1 ? 'Sí' : (dg.fragmenta == 2 ? 'No' : '') }}</span>
+                        <br>
+                        <strong *ngIf="dg.fragmenta == 1">Número de fragmentos en que se divide el producto: </strong>
+                        <span class="badge m-1">{{ dg.n_fragmenta }}</span>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <strong>Cobertura del producto: </strong>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__1 == 1">
+                          {{ dg.cobertura_geo__1 == 1 ? 'Nacional' : '' }}
+
+                        </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__2 == 1">
+                          {{ dg.cobertura_geo__2 == 1 ? 'Estatal' : ''}}
+
+                        </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__3 == 1">
+                          {{ dg.cobertura_geo__3 == 1 ? 'Municipal' : '' }}
+
+                        </span>
+                        <span class="badge me-1" *ngIf="dg.cobertura_geo__4 == 1">
+                          {{ dg.cobertura_geo__4 == 1 ? 'Regional' : '' }}
+
+                        </span>
+                        <span class="badge" *ngIf="dg.cobertura_geo__5 == 1">
+                          {{ dg.cobertura_geo__5 == 1 ? 'Otra: ' + dg.o_cobertura : '' }}
+
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">
+                        <span>
+                          <strong>Año de referencia:</strong>
+                          {{ dg.a_referencia}}
+                        </span>
+                      </div>
+                      <div class="col">
+                        <span>
+                          <strong>Año de publicación:</strong>
+                          {{ dg.a_publicacion}}
+                        </span>
+                      </div>
+                    </div>
+                    <span *ngIf="dg.actualizacion == 1">
+                      <strong>Se actualiza:</strong>
+                      {{ dg.p_actualizacion == 1 ? 'Mensual' : (dg.p_actualizacion == 2 ? 'Anual' : '') }}
+                      {{ dg.p_actualizacion == 3 ? 'Bienal' : (dg.p_actualizacion == 4 ? 'Cuatrienal' : '') }}
+                      {{ dg.p_actualizacion == 5 ? 'Quinquenal' : (dg.p_actualizacion == 6 ? 'Irregular' : '') }}
+                      {{ dg.p_actualizacion == 7 ? ''+ dg.o_periodo : ''}}
+                    </span>
+                    <span *ngIf="dg.actualizacion == 2">
+                      <strong>Se actualiza: No</strong>
+                    </span>
+                    <br>
+                    <span *ngIf="dg.liga">
+                      <strong>Ligas de acceso: </strong>
+                      <a (click)="$event.stopPropagation()" target="_blank" [href]="dg.liga">enlace.</a>
+                    </span>
+                    <br>
+                    <span *ngIf="dg.metodologia == 1">
+                      <strong *ngIf="dg.metodologia == 1">Cuenta con metodologia: </strong>
+                      <a (click)="$event.stopPropagation()" [href]="dg.liga_metodologia" target="_blank">enlace.</a>
+                    </span>
+                    <span *ngIf="dg.metodologia == 2">
+                      <strong>No cuenta con metodologia</strong>
+                    </span>
+                  </div>
+
+                  <div class="col">
+                    <strong>Tipo(s) de soporte del producto:</strong>
+                    <div class="row">
+                      <div class="col" *ngIf="dg?.tipo_soporte__1 == 1">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{ dg.tipo_soporte__1 == 1
+                            ? 'Datos Geográficos' : ''}}
+                          </li>
+                          <li *ngIf="dg.tipo_soporte__1 == 1" class="list-group-item">
+                            <strong> En formato: </strong>
+
+                            <span class="badge me-1" *ngIf="dg.formato_geo__1 == 1">
+                              {{ dg.formato_geo__1 == 1 ? 'Conjunto de datos vectoriales (SHP)' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_geo__2 == 1">
+                              {{ dg.formato_geo__2 == 1 ? 'Raster (TIIF, GIF, BIL, etc.)' : ''}}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_geo__3 == 1">
+                              {{ dg.formato_geo__3 == 1 ? 'GeoPDF' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_geo__4 == 1">
+                              {{ dg.formato_geo__4 == 1 ? 'PDF' : '' }}
+
+                            </span>
+                            <span class="badge" *ngIf="dg.formato_geo__5 == 1">
+                              {{ dg.formato_geo__5 == 1 ? 'Otro: ' + dg.o_formato_geo : '' }}
+
+                            </span>
+
+                          </li>
+
+
+                        </ul>
+
+
+                      </div>
+
+                      <div class="col" *ngIf="(dg?.tipo_soporte__1 == 1 || dg?.tipo_soporte__1 == 0) && dg?.tipo_soporte__2 == 1 ">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{
+                            dg.tipo_soporte__2 == 1
+                            ? 'Tabulado' : ''
+                            }}
+                          </li>
+                          <li class="list-group-item">
+                            <strong> En formato: </strong>
+
+                            <span class="badge me-1" *ngIf="dg.formato_tab__1 == 1">
+                              {{ dg.formato_tab__1 == 1 ? '.dbf' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_tab__2 == 1">
+                              {{ dg.formato_tab__2 == 1 ? '.csv' : ''}}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_tab__3 == 1">
+                              {{ dg.formato_tab__3 == 1 ? '.txt' : '' }}
+
+                            </span>
+                            <span class="badge me-1" *ngIf="dg.formato_tab__4 == 1">
+                              {{ dg.formato_tab__4 == 1 ? '.xlsx' : '' }}
+
+                            </span>
+                            <span class="badge" *ngIf="dg.formato_tab__5 == 1">
+                              {{ dg.formato_tab__5 == 1 ? 'Otro: ' + dg.o_formato_tab : '' }}
+
+                            </span>
+
+
+                          </li>
+
+                        </ul>
+
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col" *ngIf="dg.tipo_soporte__3">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{
+                            dg.tipo_soporte__3 == 1
+                            ? 'Publicaciones' : ''
+                            }}
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col" *ngIf="dg.tipo_soporte__4">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item text-primary-emphasis bg-primary-subtle">
+                            {{
+                            dg.tipo_soporte__4 == 1
+                            ? 'Otro: ' + dg.o_soporte : ''
+                            }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
 
   <div class="col-4">
-
-    <h1>VAR</h1>
-    <strong>Variables detectadas</strong>
-    <div class="row" *ngFor="let item of secuenciaVAR">
-      <div class="col">
-
-
-        <br>
-        <strong>Variable: </strong>
-        <span for=""> {{item.nom_var}}</span>
-
-
-        <br>
-
-
-
-
-      </div>
+    <div class="card1 shadow-sm  bg-body-tertiary rounded">
+      <h3>VARIABLE</h3>
+      <h6 class="h666">Variables detectadas</h6>
+      <ng-container *ngIf="secuenciaVAR && secuenciaVAR.length > 0; else nosecuenciaVAR">
+        <div class="row" >
+          <div class="col">
+            <div class="card card-body">
+              <div class="row" *ngFor="let item of secuenciaVAR">
+                <div class="col">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-primary-emphasis bg-primary-subtle p-1 m-1">
+                      {{item.nom_var}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #nosecuenciaVAR>
+        <div class="card card-body">
+          <h5>Ninguna variable detectada.</h5>
+        </div>
+      </ng-template>
     </div>
   </div>
+
+
   <div class="col-4">
-    <h1>PI</h1>
-    <div class="row" *ngFor="let item of pi">
-      <div class="col">
-        <strong>Unidad Administrativa responsable del PI:</strong>
-
-        <br>
-        <p for=""> {{getDireccionGeneralText(item.dg_pi)}}</p>
-        <br>
-        <strong>Programa de Información (PI):</strong>
-
-        <br>
-        <p for=""> {{getProgInfoText(item.nom_pi)}}</p>
-
-
-        <br>
-        <strong>Proceso de Producción del PI:</strong>
-
-        <br>
-        <p for=""> {{getProgInfoText(item.pp_pi)}}</p>
-
-        <br>
-        <strong>Dirección General Adjunta responsable del Programa de Información:</strong>
-
-        <br>
-        <p for=""> {{getDga_PprodText(item.dga_pi)}}</p>
-
-      </div>
+    <div class="card1 shadow-sm  bg-body-tertiary rounded">
+      <h3>PI</h3>
+      <h6 class="h666">Programas de información detectados</h6>
+      <ng-container *ngIf="pi && pi.length > 0; else noPi">
+        <div class="row" *ngFor="let item of pi">
+          <div class="col">
+            <div class="card card-body">
+              <div class="row">
+                <div class="col">
+                    <strong>Unidad Administrativa responsable del PI:</strong>
+                    <br>
+                    <span for=""> {{getDireccionGeneralText(item.dg_pi)}}</span>
+                    <br>
+                    <strong>Programa de Información (PI):</strong>
+                    <br>
+                    <span for=""> {{getProgInfoText(item.nom_pi)}}</span>
+                    <br>
+                    <strong>Proceso de Producción del PI:</strong>
+                    <br>
+                    <span for=""> {{getProgInfoText(item.pp_pi)}}</span>
+                    <br>
+                    <strong>Dirección General Adjunta responsable del Programa de Información:</strong>
+                    <br>
+                    <span for=""> {{getDga_PprodText(item.dga_pi)}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noPi>
+        <div class="card card-body">
+          <h5>Ningún programa de información detectado.</h5>
+        </div>
+      </ng-template>
     </div>
   </div>
+
+
   <div class="col-4">
-
-    <h1>AEG</h1>
-    <strong>Actividades Estadísticas o Geográficas:</strong>
-    <div class="row" *ngFor="let item of aegSecuencia">
-      <div class="col">
-        <br>
-        <strong>Dirección General responsable de la AEG: </strong>
-        <span for=""> {{getDga_PprodText(item.dg_aeg)}}</span>
-        <br>
-        <strong>Actividad Estadística o Geográfica para la UA: </strong>
-        <span for=""> {{getAEG_2Text(item.nom_aeg)}}</span>
-        <br>
-        <strong>Dirección General Adjunta responsable de la AEG: </strong>
-        <span for=""> {{getAEG_ProdText(item.dga_aeg)}}</span>
-        <br>
+    <div class="card1 shadow-sm  bg-body-tertiary rounded">
+      <h3>AEG</h3>
+      <h6 class="h666">Actividades Estadísticas o Geográficas:</h6>
+      <ng-container *ngIf="aegSecuencia && aegSecuencia.length > 0; else noaegSecuencia">
+        <div class="row" *ngFor="let item of aegSecuencia">
+        <div class="col">
+          <div class="card card-body">
+            <div class="row" >
+              <div class="col">
+                <strong>Dirección General responsable de la AEG: </strong>
+                <br>
+                <span for=""> {{getDga_PprodText(item.dg_aeg)}}.</span>
+                <br>
+                <strong>Actividad Estadística o Geográfica para la UA: </strong>
+                <br>
+                <span for=""> {{getAEG_2Text(item.nom_aeg)}}.</span>
+                <br>
+                <strong>Dirección General Adjunta responsable de la AEG: </strong>
+                <br>
+                <span for=""> {{getAEG_ProdText(item.dga_aeg)}}.</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      </ng-container>
+      <ng-template #noaegSecuencia>
+        <div class="card card-body">
+          <h5>Ninguna Actividades Estadísticas o Geográficas detectada.</h5>
+        </div>
+      </ng-template>
     </div>
   </div>
-  <div class="col-4 mt-5">
 
-    <h1>MDEA</h1>
-    <strong>Relación con el Marco para el Desarrollo de las Estadísticas:</strong>
-    <div class="row" *ngFor="let item of mdeas">
-      <div class="col" >
-
-
-        <br>
-        <strong>Componente: </strong>
-        <span for=""> {{getComponenteText(item.comp_mdea)}}</span>
-        <br>
-        <strong>Subcomponente: </strong>
-        <span for=""> {{getSubcomponenteText(item.subcomp_mdea)}}</span>
-        <br>
-        <strong>Topico: </strong>
-        <span for=""> {{getTopicoText(item.topico_mdea)}}</span>
-        <br>
-
-
-
-
-      </div>
-    </div>
-  </div>
 
   <div class="col-4 mt-5">
-
-    <h1>ODS</h1>
-    <strong>Relación con los Objetivos del Desarrollo Sostenible (ODS):</strong>
-    <div class="row" *ngFor="let item of ODSes">
-      <div class="col">
-
-
-        <br>
-        <strong>Objetivo: </strong>
-        <span for=""> {{getObjetivODSText(item.obj_ods)}}</span>
-        <br>
-        <strong>Meta: </strong>
-        <span for=""> {{getMetaODSText(item.meta_ods)}}</span>
-        <br>
-
-
-
-
+    <div class="card1 shadow-sm  bg-body-tertiary rounded">
+      <h3>MDEA</h3>
+      <h6 class="h666">Relación con el Marco para el Desarrollo de las Estadísticas Ambientales:</h6>
+      <ng-container *ngIf="mdeas && mdeas.length > 0; else nomdeas">
+        <div class="row" *ngFor="let item of mdeas">
+        <div class="col" >
+          <div class="card card-body mb-2">
+            <div class="row">
+              <div class="col">
+                <strong>Componente: </strong>
+                <span for=""> {{getComponenteText(item.comp_mdea)}}</span>
+                <br>
+                <strong>Subcomponente: </strong>
+                <span for=""> {{getSubcomponenteText(item.subcomp_mdea)}}</span>
+                <br>
+                <strong>Topico: </strong>
+                <span for=""> {{getTopicoText(item.topico_mdea)}}</span>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      </ng-container>
+      <ng-template #nomdeas>
+        <div class="card card-body">
+          <h5>Ninguna relación con el Marco para el Desarrollo de las Estadísticas Ambientales.</h5>
+        </div>
+      </ng-template>
     </div>
   </div>
 
   <div class="col-4 mt-5">
-
-    <h1>PS</h1>
-    <strong>Relación con algún Programa Sectorial (PS):</strong>
-    <div class="row" *ngFor="let item of PSes">
-      <div class="col">
-
-
-        <br>
-        <strong>Programa Sectorial: </strong>
-        <span for=""> {{getps2023Text(item.prog_ps)}}</span>
-        <br>
-        <strong>Indicador que corresponde al PS: </strong>
-        <span for=""> {{getIndicadoresPS2023Text(item.indicador_ps)}}</span>
-        <br>
-
-
-
-
+    <div class="card1 shadow-sm  bg-body-tertiary rounded">
+      <h3>ODS</h3>
+      <h6 class="h666">Relación con los Objetivos del Desarrollo Sostenible (ODS):</h6>
+      <ng-container *ngIf="ODSes && ODSes.length > 0; else noODSes">
+        <div class="row" *ngFor="let item of ODSes">
+        <div class="col">
+          <div class="card card-body mb-2">
+            <div class="row">
+              <div class="col">
+                <strong>Objetivo: </strong>
+                <span class=""> {{getObjetivODSText(item.obj_ods)}}</span>
+                <hr>
+                <strong>Meta: </strong>
+                <span for=""> {{getMetaODSText(item.meta_ods)}}</span>
+                <br>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      </ng-container>
+      <ng-template #noODSes>
+        <div class="card card-body">
+          <h5>Ninguna relación con los Objetivos del Desarrollo Sostenible (ODS).</h5>
+        </div>
+      </ng-template>
     </div>
   </div>
 
 
+  <div class="col-4 mt-5">
+    <div class="card1 shadow-sm  bg-body-tertiary rounded">
+      <h3>PS</h3>
+      <h6 class="h666">Relación con algún Programa Sectorial (PS):</h6>
+      <ng-container *ngIf="PSes && PSes.length > 0; else noPSes">
+        <div class="row" *ngFor="let item of PSes">
+        <div class="col">
+          <div class="card card-body mb-2">
+            <div class="row">
+              <div class="col">
+                <strong>Programa Sectorial: </strong>
+                <span>{{getps2023Text(item.prog_ps)}}</span>
+                <br>
+                <div *ngIf="item.indicador_ps">
+                  <hr class="m-1">
+                  <strong>Indicador que corresponde al PS: </strong>
+                  <span> {{getIndicadoresPS2023Text(item.indicador_ps)}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-container>
+      <ng-template #noPSes>
+        <div class="card card-body">
+          <h5>Ninguna relación con algún Programa Sectorial (PS).</h5>
+        </div>
+      </ng-template>
 
-
-
+    </div>
+  </div>
 </div>
 </div>
 

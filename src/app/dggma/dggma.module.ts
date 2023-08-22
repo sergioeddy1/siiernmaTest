@@ -8,6 +8,8 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { ByidsComponent } from './pages/byids/byids.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +23,11 @@ import { ByidsComponent } from './pages/byids/byids.component';
   ],
   imports: [
     CommonModule,
-    DggmaRoutingModule
+    DggmaRoutingModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ]
 })
 export class DggmaModule { }
