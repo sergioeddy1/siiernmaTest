@@ -1,4 +1,63 @@
 
 
+<!-- <nav class="navbar" style="background-color: #e3f2fd;">
 
+  <div class="container-fluid">
+    <img src="../../../../assets/INEGI_g.png" alt="Logo" width="8%" class="d-inline-block align-text-top">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</nav> -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <img src="../../../../assets/INEGI_g.png" alt="Logo" width="8%" class="d-inline-block align-text-top" />
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" [routerLink]="['/dg/dg']">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Features</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Direcciones Generales
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" [routerLink]="['/dg/content/1']">Geografía y Medio Ambiente</a></li>
+            <li><a class="dropdown-item" href="#" [routerLink]="['/dg/content/2']">Estadísticas Sociodemográficas</a></li>
+            <li><a class="dropdown-item" href="#" [routerLink]="['/dg/content/3']">Estadísticas Económicas</a></li>
+            <li><a class="dropdown-item" href="#" [routerLink]="['/dg/content/4']">Estadísticas de Gobierno, Seguridad Pública y Justicia</a></li>
+            <li><a class="dropdown-item" href="#" [routerLink]="['/dg/content/5']">Estadísticas Integración, Análisis e Investigación</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h5 style="color: #212529;">Eje Temático del Agua</h5>
+  </div>
+</nav>
 <router-outlet></router-outlet>

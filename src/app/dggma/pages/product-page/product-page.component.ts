@@ -18,6 +18,19 @@ interface CheckboxesState {
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit{
+  //? fechas para referencia
+  startDate: number = 0;
+  endDate: number = 0;
+  //? fechas para publicaciones
+  startDate2: number = 0;
+  endDate2: number = 0;
+
+  a_referenciaDesde: string[] = [];
+  a_referenciaHasta: string[] = [];
+
+  a_publicacionDesde: string[] = [];
+  a_publicacionHasta: string[] = [];
+
 
 
  searchFormControl: FormControl = new FormControl();
@@ -68,6 +81,62 @@ export class ProductPageComponent implements OnInit{
 
   ngOnInit(): void {
 
+    //! AQUÍ TODO LO DE LAS FECHAS DE REFERENCIA
+    this._leeLink.params.pipe(switchMap(({ by }) =>{
+        return this._direServices.getProductArrayDateREFERENCIA(by)
+      })
+    ).subscribe( data => {
+      const uniqueYears = data.filter((year, index, self) => {
+        return year.length === 4 && !isNaN(Number(year)) && self.indexOf(year) === index;
+      });
+
+      const sortedYears = uniqueYears.sort((a, b) => parseInt(a) - parseInt(b));
+      console.log(sortedYears);
+      this.a_referenciaDesde = sortedYears
+    });
+
+    this._leeLink.params.pipe(switchMap(({ by }) =>{
+        return this._direServices.getProductArrayDateREFERENCIAhasta(by)
+      })
+    ).subscribe( data => {
+      const uniqueYears = data.filter((year, index, self) => {
+        return year.length === 4 && !isNaN(Number(year)) && self.indexOf(year) === index;
+      });
+
+      const sortedYearsHasta = uniqueYears.sort((a, b) => parseInt(a) - parseInt(b));
+      console.log(sortedYearsHasta);
+      this.a_referenciaHasta = sortedYearsHasta
+    });
+
+    //! AQUÍ TODO LO DE LAS FECHAS DE PUBLICACIÓN
+    this._leeLink.params.pipe(switchMap(({ by }) =>{
+        return this._direServices.getProductArrayDatePUBLICACION(by)
+      })
+    ).subscribe( data => {
+      const uniqueYears = data.filter((year, index, self) => {
+        return year.length === 4 && !isNaN(Number(year)) && self.indexOf(year) === index;
+      });
+
+      const sortedYears = uniqueYears.sort((a, b) => parseInt(a) - parseInt(b));
+      console.log(sortedYears);
+      this.a_publicacionDesde = sortedYears
+    });
+
+    this._leeLink.params.pipe(switchMap(({ by }) =>{
+        return this._direServices.getProductArrayDatePUBLICACIONhasta(by)
+      })
+    ).subscribe( data => {
+      const uniqueYears = data.filter((year, index, self) => {
+        return year.length === 4 && !isNaN(Number(year)) && self.indexOf(year) === index;
+      });
+
+      const sortedYearsHasta = uniqueYears.sort((a, b) => parseInt(a) - parseInt(b));
+      console.log(sortedYearsHasta);
+      this.a_publicacionHasta = sortedYearsHasta
+    });
+
+
+
     this.filteredProducts$ = this.searchFormControl.valueChanges.pipe(
     debounceTime(200),
     distinctUntilChanged(),
@@ -87,17 +156,6 @@ export class ProductPageComponent implements OnInit{
     this._leeLink.params
     .pipe(
       switchMap(({ by }) =>{
-        if (by === '1') {
-        this.checkboxesState['dggma'] = true;
-      } else if (by === '2') {
-        this.checkboxesState['dgee'] = true;
-      } else if (by === '3') {
-        this.checkboxesState['dges'] = true;
-      } else if (by === '4') {
-        this.checkboxesState['dgiai'] = true;
-      } else if (by === '5') {
-        this.checkboxesState['dgegspj'] = true;
-      }
         return this._direServices.getSecuenciaProductBy(by)
       } )
     )
@@ -155,6 +213,10 @@ export class ProductPageComponent implements OnInit{
 
   };
   this.showFilteredProducts = false;
+  this.startDate  = 0;
+  this.endDate = 0;
+  this.startDate2  = 0;
+  this.endDate2 = 0;
 
   this.ngOnInit();
 }
@@ -203,11 +265,39 @@ export class ProductPageComponent implements OnInit{
       // Combina los resultados de los filtros de tipo y cobertura
       return passTypeFilter && passCoberturaFilter && passTipoSoporteFilter;
     });
+  }
+  this.filterProductsByDateRangeReferencia();
+  this.filterProductsByDateRangePublicacion();
+}
 
 
+  filterProductsByDateRangeReferencia(): void {
+    if (this.startDate && this.endDate) {
+      this.showFilteredProducts = true;
+    this.filteredProducts = this.filteredProducts.filter(product => {
+      const publicationYear = parseInt(product.a_referencia.toString());
+      const publicationYear2 = product.a_referencia ? parseInt(product.a_referencia.toString()) : this.endDate + 1;
+      return publicationYear >= this.startDate && publicationYear2 <= this.endDate;
+    });
+
+    console.log(this.filteredProducts)
+  }
   }
 
-}
+  filterProductsByDateRangePublicacion(): void {
+    if (this.startDate2 && this.endDate2) {
+      this.showFilteredProducts = true;
+    this.filteredProducts = this.filteredProducts.filter(product => {
+      const publicationYear = parseInt(product.a_publicacion.toString());
+      const publicationYear2 = product.a_publicacion ? parseInt(product.a_publicacion.toString()) : this.endDate2 + 1;
+      return publicationYear >= this.startDate2 && publicationYear2 <= this.endDate2;
+    });
+
+    console.log(this.filteredProducts)
+  }
+  }
+
+
 
 
 

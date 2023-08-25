@@ -87,6 +87,9 @@ export class ByidsComponent implements OnInit{
     this._direServices.getIndicadoresPS2023()
     .subscribe( indiPS2023 => this.indicadoresPS2023 = indiPS2023)
 
+    this._direServices.getEscalas()
+    .subscribe( escala => this.escalas = escala)
+
 
 
 
@@ -142,19 +145,6 @@ export class ByidsComponent implements OnInit{
     .pipe(
 
       switchMap(({ id }) =>{
-
-        // if (by==1) {
-        //   by=2
-        // } else if(by==2) {
-        //   by=3
-        // } else if ( by==3){
-        //   by=1
-        // } else if ( by==4){
-        //   by=5
-        // } else if ( by ==5){
-        //   by=4
-        // }
-
         return this._direServices.getProductById(id)
       } )
     )
@@ -314,14 +304,27 @@ getIndicadoresPS2023Text(indicador_ps: number): string {
 }
 getEscalasText(indicador_ps: number): string {
   let escalasText = '';
+
   for (let escalas of this.escalas) {
     if (escalas.id === indicador_ps) {
       escalasText = escalas.text;
       break;
     }
+
   }
+  console.log(escalasText)
   return escalasText;
+
 }
 
+
+
+  toggleCollapse(index: number): void {
+    if (this.expandedIndex === index) {
+      this.expandedIndex = null;
+    } else {
+      this.expandedIndex = index;
+    }
+  }
 
 }

@@ -113,6 +113,36 @@ export class DGService {
       );
   }
 
+  getProductArrayDateREFERENCIA(id: string): Observable<string[]> {
+  const url = `${this.baseUrl}/products?dg_prod=${id}`;
+  return this._http.get<Products[]>(url)
+    .pipe(
+      map(products => products.map(product => product.a_referencia.toString())),
+    );
+  }
+  getProductArrayDateREFERENCIAhasta(id: string): Observable<string[]> {
+  const url = `${this.baseUrl}/products?dg_prod=${id}`;
+  return this._http.get<Products[]>(url)
+    .pipe(
+      map(products => products.map(product => (product.a_referencia2 !== undefined) ? product.a_referencia2.toString() : '')),
+    );
+  }
+
+  getProductArrayDatePUBLICACION(id: string): Observable<string[]> {
+  const url = `${this.baseUrl}/products?dg_prod=${id}`;
+  return this._http.get<Products[]>(url)
+    .pipe(
+      map(products => products.map(product => product.a_publicacion.toString())),
+    );
+  }
+  getProductArrayDatePUBLICACIONhasta(id: string): Observable<string[]> {
+  const url = `${this.baseUrl}/products?dg_prod=${id}`;
+  return this._http.get<Products[]>(url)
+    .pipe(
+      map(products => products.map(product => (product.a_publicacion2 !== undefined) ? product.a_publicacion2.toString() : '')),
+    );
+  }
+
   getProductById( id: string ): Observable<Products[]> {
     const url = `${ this.baseUrl}/products?interview__id=${ id }`;
     console.log(url);

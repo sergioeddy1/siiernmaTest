@@ -3,17 +3,17 @@ export interface Products {
     interview__id:     string;
     nom_producto:      string;
     nom_prod:          string;
-    dg_prod:           number;
-    tipo_prod__1:      number;
-    tipo_prod__2:      number;
-    escala:            number ;
+    dg_prod:           number | string;
+    tipo_prod__1:      number | string;
+    tipo_prod__2:      number | string;
+    escala:            number;
     o_escala:          OEscala;
-    fragmenta:         number;
+    fragmenta:         number | string;
     n_fragmenta:       number | string;
-    tipo_soporte__1:   number;
-    tipo_soporte__2:   number;
-    tipo_soporte__3:   number;
-    tipo_soporte__4:   number;
+    tipo_soporte__1:   number | string;
+    tipo_soporte__2:   number | string;
+    tipo_soporte__3:   number | string;
+    tipo_soporte__4:   number | string;
     o_soporte:         OSoporte;
     formato_geo__1:    number | string;
     formato_geo__2:    number | string;
@@ -27,11 +27,11 @@ export interface Products {
     formato_tab__4:    number | string;
     formato_tab__5:    number | string;
     o_formato_tab:     OFormatoTab;
-    cobertura_geo__1:  number;
-    cobertura_geo__2:  number;
-    cobertura_geo__3:  number;
-    cobertura_geo__4:  number;
-    cobertura_geo__5:  number;
+    cobertura_geo__1:  number | string;
+    cobertura_geo__2:  number | string;
+    cobertura_geo__3:  number | string;
+    cobertura_geo__4:  number | string;
+    cobertura_geo__5:  number | string;
     o_cobertura:       string;
     a_referencia:      number | string;
     a_publicacion:     number | string;
@@ -41,7 +41,7 @@ export interface Products {
     liga:              string;
     metodologia:       number | string;
     liga_metodologia:  string;
-    comentario_cg:     string;
+    comentario_cg:     number | string;
     num_var:           number | string;
     pi:                number | string;
     num_pi:            number | string;
@@ -65,6 +65,8 @@ export interface Products {
     has__errors:       number;
     interview__status: number;
     assignment__id:    number;
+    a_publicacion2?:   number;
+    a_referencia2?:    number;
 }
 
 export enum OEscala {
