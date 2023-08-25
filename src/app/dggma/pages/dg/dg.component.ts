@@ -34,7 +34,7 @@ export class DgComponent implements OnInit{
     const extensions = ['jpg', 'jpg', 'jpg', 'png', 'png']; // Cambia según tus necesidades
     for (let i = 0; i < extensions.length; i++) {
       const imgExtension = extensions[i];
-      imgArray.push({ img: `../../../../assets/img${i + 1}.${imgExtension}` });
+      imgArray.push({ img: `./assets/img${i + 1}.${imgExtension}` });
       this.imgArray = imgArray;
     }
     console.log(imgArray);
